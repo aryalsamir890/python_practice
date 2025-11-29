@@ -20,3 +20,50 @@ for i in file:
             continue
     else:
         continue
+
+# upper is mine no such important logic or not more advanced 
+
+# by the chatgpt best one !!!!
+# .....
+# ....
+# ...
+# ..
+# .
+import os
+import shutil
+
+# Path of your messy folder
+folder = r"C:\Users\User\OneDrive\Desktop\ython.py\file_organize.py"
+
+# List all files
+files = os.listdir(folder)
+
+for i in files:
+    src = os.path.join(folder, i)
+
+    # Skip if it is a folder
+    if os.path.isdir(src):
+        continue
+
+    # Get extension safely
+    _, ext = os.path.splitext(i)
+    ext = ext.lower()  # make it lowercase
+
+    # Decide destination folder
+    if ext == ".mp4":
+        dest_folder = os.path.join(folder, "Videos")
+    elif ext in [".jpg", ".jpeg", ".png"]:
+        dest_folder = os.path.join(folder, "Images")
+    elif ext == ".pdf":
+        dest_folder = os.path.join(folder, "Documents")
+    else:
+        dest_folder = os.path.join(folder, "Others")
+
+    # Create folder if not exists
+    os.makedirs(dest_folder, exist_ok=True)
+
+    # Move file
+    dest = os.path.join(dest_folder, i)
+    shutil.move(src, dest)
+
+print("Files organized successfully!")

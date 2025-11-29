@@ -1,3 +1,42 @@
+# code given by the chatgpt haha!!
+questions = [
+    {
+        "question": "1. What is the capital of Nepal?",
+        "options": ["A) Pokhara", "B) Kathmandu", "C) Bhaktapur"],
+        "answer": "B"
+    },
+    {
+        "question": "2. Who developed Python?",
+        "options": ["A) Steve Jobs", "B) Mark Zuckerberg", "C) Guido van Rossum"],
+        "answer": "C"
+    },
+    {
+        "question": "3. Which one is a programming language?",
+        "options": ["A) Python", "B) HTML", "C) Both"],
+        "answer": "C"
+    }
+]
+
+score = 0
+
+print("\n===== QUIZ GAME =====\n")
+
+for q in questions:
+    print(q["question"])
+    for opt in q["options"]:
+        print(opt)
+    
+    user_ans = input("Your answer (A/B/C): ").strip().upper()
+
+    if user_ans == q["answer"]:
+        print("✔ Correct!\n")
+        score += 1
+    else:
+        print("✘ Wrong!\n")
+
+print(f"Your final score: {score}/{len(questions)}")
+
+# code by me :
 def ques1():
     print("national animal of nepal?")
     print("1.cow 2.buffalo 3.mouse 4.sark")
@@ -53,4 +92,9 @@ else:
     print("darpog !!")
     
 print(f"your total score is:{c}")
+if(c==4):
+    print("topper")
+
+else:
+    print("study hard bro!!")
 
