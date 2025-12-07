@@ -1,0 +1,162 @@
+create database practice;
+use practice;
+
+create table student(
+roll int ,
+name varchar(90),
+marks int,
+salary int,
+city varchar(90));
+
+insert into student
+values 
+(1, 'Samir', 100, 1200, 'ktm'),
+(2, 'Puspa', 90, 1100, 'ktm'),
+(3, 'Sandesh', 80, 1000, 'pokhara'),
+(4, 'Puja', 70, 1050, 'chitwan'),
+(5, 'Rupa', 95, 1300, 'chitwan'),
+(6, 'Sanjay', 85, 1150, 'pokhara'),
+(7, 'Sita', 60, 1000, 'ktm'),
+(8, 'Ramesh', 75, 950, 'chitwan');
+
+
+select * from student;
+
+select name,marks from student;
+
+select * from student 
+where marks>80;
+
+
+select * from student 
+where city="ktm";
+
+select * from student 
+where name like "s%";
+
+select city,count(name)
+from student 
+group by city;
+
+select city,avg(marks)
+from student
+group by city;
+
+select city,max(marks)
+from student
+group by city;
+
+select city,count(name)
+from student
+where marks >70 
+group by city;
+
+select city,group_concat(name) as student_names
+from student 
+group by city;
+
+select *
+from student 
+order by marks desc;
+
+select *
+from student
+order by marks desc
+limit 3;
+
+select distinct city 
+from student;
+
+select *
+from student
+order by marks desc
+limit 1
+offset 1;
+
+update student 
+set marks=marks+10
+where roll between 3 and 8;
+
+update student 
+set salary=salary+(0.1*salary);
+select * from student;
+
+delete from student 
+where marks<80;
+
+create table marks(
+roll int,
+subject varchar(90),
+mark_obtained int,
+foreign key(roll) references student(roll)
+on update cascade 
+on delete cascade);
+
+insert into marks
+values 
+(1, 'Math', 95),
+(1, 'Science', 90),
+(2, 'Math', 88),
+(3, 'Math', 75),
+(3, 'Science', 70),
+(5, 'Science', 98),
+(8, 'Math', 60);
+
+select a.name,b.subject,b.mark_obtained
+from student as a 
+inner join marks as b
+on a.roll=b.roll;
+
+select *
+from student as a 
+left join marks as b
+on a.roll=b.roll;
+
+select * 
+from student as a 
+right join marks as b
+on a.roll=b.roll;
+
+create table mentor(
+roll int,
+name varchar(90),
+class int,
+mentor_roll int);
+
+insert into mentor 
+values
+(1, 'Ram', 10, 3),
+(2, 'Sita', 10, 1),
+(3, 'Hari', 10, NULL),
+(4, 'Gita', 10, 3),
+(5, 'Nabin', 10, 2);
+
+
+select a.name,b.name
+from mentor as a 
+join mentor as b
+on a.roll=b.mentor_roll;
+
+select city,avg(marks) as avgs
+from student
+group by city
+order by avgs desc
+limit 1;
+
+select city ,avg(marks)
+from student  
+group by city
+having avg(marks)>60;
+
+select *from student
+where marks>(select avg(marks) from student);
+
+select city,name,marks 
+from student as s  
+where marks>(
+select avg(marks)
+from student 
+where city=s.city);
+
+
+
